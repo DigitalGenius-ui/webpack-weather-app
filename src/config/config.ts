@@ -12,6 +12,20 @@ const getWeatherData = ( typeInfo : string, searchParam : object) => {
     return fetch(url).then((res) => res.json());
 }
 
+// format weather data 
+export const formatWeatherData = async (searchParam : any) => {
+    const response = await getWeatherData('weather', searchParam)
+    .then(formatCurrentWeather);
+
+    // get full days and hours weather 
+    const { lat , lon } = response;
+    const formatAllWeather = await getWeatherData("onecall", {
+        lat, lon, exclude :"current,minutely,alerts,", units: searchParam.units
+    })
+    .then(formatWeatherNumbers);
+    return {...response, ...formatAllWeather};
+}
+
 // format current weather 
 const formatCurrentWeather = (data: any) => {
     const { main:details, icon } = data.weather[0];
@@ -29,23 +43,8 @@ const formatCurrentWeather = (data: any) => {
         country, sunrise, sunset, timezone, deg, speed, details, icon, dt };
 }
 
-// format weather data 
-export const formatWeatherData = async (searchParam : any) => {
-    const response = await getWeatherData('weather', searchParam)
-    .then(formatCurrentWeather);
-
-    // get full days and hours weather 
-    const { lat , lon } = response;
-    const formatAllWeather = await getWeatherData("onecall", {
-        lat, lon, exclude :"current,minutely,alerts,", units: searchParam.units
-    })
-    .then(formatWeatherNumbers);
-    return {response, formatAllWeather};
-}
-
 // format weather number
 const formatWeatherNumbers = (data : any) => {
-    console.log(data);
     let { daily, hourly, timezone} = data;
     daily = daily.slice(1,7).map((day:any) => {
         return {
@@ -64,7 +63,7 @@ const formatWeatherNumbers = (data : any) => {
 
     return {daily, hourly, timezone}
 }
-const formatLuxon = (sec : number, zone: any, format = "cccc, LLL yyyy 'Local Time : 'hh mm a") => (
+const formatLuxon = (sec : number, zone: number, format = "cccc, LLL yyyy 'Local Time : 'hh mm a") => (
     DateTime.fromSeconds(sec).setZone(zone).toFormat(format)
 );
 

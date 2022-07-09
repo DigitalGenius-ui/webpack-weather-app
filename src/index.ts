@@ -1,6 +1,4 @@
 import "./styles/main.scss";
-// font awesome 
-import '@fortawesome/fontawesome-free/js/all.js';
 // geoLocation
 import { formatWeatherData } from "./config/config"; 
 
@@ -9,4 +7,4 @@ const fetchData = async () => {
     console.log(response)
 }
 
-fetchData();
+fetchData()

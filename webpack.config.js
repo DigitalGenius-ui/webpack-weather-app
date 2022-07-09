@@ -34,12 +34,8 @@ module.exports = {
             }, 
             // font awesome and image 
             {
-                test: /\.(svg|eot|woff|woff2|ttf|png|jpg|jpeg)$/,
+                test: /\.(svg|png|jpg|jpeg|gif)$/,
                 exclude : /node_modules/,
-                loader:'file-loader',
-                options : {
-                    outputPath : 'fonts',
-                }
             }
         ]
     },

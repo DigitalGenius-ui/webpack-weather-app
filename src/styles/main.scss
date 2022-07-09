@@ -1,6 +1,5 @@
-//importing font awesome
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '~@fortawesome/fontawesome-free/css/all.css';
+//importing bootstrap
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 // weather css file 
 @import "./weather.scss";
 // google font link 
