@@ -1,10 +1,27 @@
 import "./styles/main.scss";
 // geoLocation
 import { formatWeatherData } from "./config/config"; 
+// import { active, textChange } from "./eventListners/eventListners";
+import { weatherUI } from "./components/showTemp";
+import { textChange } from "./eventListner.ts/events";
+const button = document.querySelector(".button");
+const search = document.querySelector(".search") as HTMLInputElement;
 
-const fetchData = async () => {
-    const response = await formatWeatherData({q :"london"});
-    console.log(response)
+// temperature name change 
+button?.addEventListener("click", textChange);
+
+
+let defaultWeather = {q : "kabul"};
+let defaultUnite = "metric";
+
+async function fetchData() {
+    await formatWeatherData({...defaultWeather, defaultUnite}).then((data) => {
+        weatherUI(data);
+    });
 }
 
-fetchData()
+window.addEventListener("DOMContentLoaded", () => {
+    fetchData();
+});
+
+

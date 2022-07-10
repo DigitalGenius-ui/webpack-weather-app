@@ -1,3 +1,5 @@
+import { formatCurrentWeatherType } from "../interfaces/interface";
+
 const { DateTime } = require("luxon");
 
 // all in weather api link 
@@ -16,7 +18,7 @@ const getWeatherData = ( typeInfo : string, searchParam : object) => {
 export const formatWeatherData = async (searchParam : any) => {
     const response = await getWeatherData('weather', searchParam)
     .then(formatCurrentWeather);
-
+    
     // get full days and hours weather 
     const { lat , lon } = response;
     const formatAllWeather = await getWeatherData("onecall", {
@@ -27,7 +29,7 @@ export const formatWeatherData = async (searchParam : any) => {
 }
 
 // format current weather 
-const formatCurrentWeather = (data: any) => {
+const formatCurrentWeather = (data: formatCurrentWeatherType) => {
     const { main:details, icon } = data.weather[0];
     const {
         coord : {lat, lon},
@@ -53,7 +55,7 @@ const formatWeatherNumbers = (data : any) => {
             icon : day.weather[0].icon
         }
     })
-    hourly = hourly.slice(1, 9).map((day:any) => {
+    hourly = hourly.slice(1, 7).map((day:any) => {
         return {
             title : formatLuxon(day.dt, timezone, "hh:mm a"),
             temp : day.temp,
@@ -63,13 +65,15 @@ const formatWeatherNumbers = (data : any) => {
 
     return {daily, hourly, timezone}
 }
-const formatLuxon = (sec : number, zone: number, format = "cccc, LLL yyyy 'Local Time : 'hh mm a") => (
+// the format is cccc for days name, LLL for month name, yyy for year, hh for hour, mm for minutes, a for am and pm.
+// for writing string we need to put a single quotation mark after and before the string.
+const formatLuxon = (sec : number, zone: number, format = "c LLL yyyy | 'Local Time : 'hh : mm a") => (
     DateTime.fromSeconds(sec).setZone(zone).toFormat(format)
 );
 
 // icons generator.
-const iconURL = (code : string) => {
-    return `http://openweathermap.org/img/wn/${code}@2x.png`
+const iconURL = (code :any) => {
+    return `<img src="http://openweathermap.org/img/wn/${code}@2x.png" alt="icon"/>`
 }
 
-export { iconURL }
+export { iconURL, formatLuxon }
