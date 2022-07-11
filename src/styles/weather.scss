@@ -53,7 +53,7 @@ body{
             .location{
                 box-shadow: 0px 0px 0px 1px inset $border;
                 padding: 0.2rem;
-                width: 16rem;
+                width: 18rem;
                 border-radius: 5px;
                 .search{
                     padding: 0.4rem;
@@ -63,13 +63,14 @@ body{
                     outline: none;
                     font-size: 0.8rem;
                     font-weight: 300;
-                    width: 90%;
+                    width: 85%;
                     &::placeholder{
                         color: $feelColor;
                     }
                 }
-                .gps{
+                .gps, .searchBtn{
                     cursor: pointer;
+                    font-size: 0.8rem;
                 }
             }
             .button{

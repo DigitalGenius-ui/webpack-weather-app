@@ -1,7 +1,4 @@
 import { formatLuxon, iconURL } from "../config/config";
-import { showDaily } from "./showDaily";
-import { showHourly } from "./showHourly";
-
 export const weatherUI = (data:any) => {
     let bodyText = `
         <div class="left-weather">
@@ -18,6 +15,4 @@ export const weatherUI = (data:any) => {
         </div>
     `
     document.querySelector(".body")!.innerHTML = bodyText;
-        // showDaily(data);
-        showHourly(data);
 }

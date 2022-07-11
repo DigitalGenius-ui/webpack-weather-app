@@ -3,7 +3,7 @@ import { formatCurrentWeatherType } from "../interfaces/interface";
 const { DateTime } = require("luxon");
 
 // all in weather api link 
-const API_CODE = `d5e22711f46282f794408858ed73c682`;
+const API_CODE = `e25ee32759521c692ad465ccbead8cd0`;
 const BASE_URL = `https://api.openweathermap.org/data/2.5`;
 
 
@@ -18,7 +18,6 @@ const getWeatherData = ( typeInfo : string, searchParam : object) => {
 export const formatWeatherData = async (searchParam : any) => {
     const response = await getWeatherData('weather', searchParam)
     .then(formatCurrentWeather);
-    
     // get full days and hours weather 
     const { lat , lon } = response;
     const formatAllWeather = await getWeatherData("onecall", {
