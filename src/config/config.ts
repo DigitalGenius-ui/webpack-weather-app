@@ -1,4 +1,4 @@
-import { formatCurrentWeatherType } from "../interfaces/interface";
+import { datas, formatCurrentWeatherType, search } from "../interfaces/interface";
 
 const { DateTime } = require("luxon");
 
@@ -15,7 +15,7 @@ const getWeatherData = ( typeInfo : string, searchParam : object) => {
 }
 
 // format weather data 
-export const formatWeatherData = async (searchParam : any) => {
+export const formatWeatherData = async (searchParam : search) => {
     const response = await getWeatherData('weather', searchParam)
     .then(formatCurrentWeather);
     // get full days and hours weather 
@@ -71,7 +71,7 @@ const formatLuxon = (sec : number, zone: number, format = "c LLL yyyy | 'Local T
 );
 
 // icons generator.
-const iconURL = (code :any) => {
+const iconURL = (code :string) => {
     return `<img src="http://openweathermap.org/img/wn/${code}@2x.png" alt="icon"/>`
 }
 

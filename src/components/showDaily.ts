@@ -1,14 +1,15 @@
 import { iconURL } from "../config/config";
+import { dailyHourly, datas } from "../interfaces/interface";
 
-export const  showDaily = (data:any) => {
-    for (const hour of data.daily ){
-        const daily =  `
-        <div class="single-time">
-        <h1>${hour.title}</h1>
-        ${iconURL(hour.icon)}
-        <h3>${(hour.temp).toFixed()}°</h3>
-        </div>
+export const  showDaily = (data:datas) => {
+        const daily = data.daily.map((day:dailyHourly) => {
+            return `
+            <div class="single-time">
+                <h1>${day.title}</h1>
+                ${iconURL(day.icon)}
+                <h3>${(day.temp).toFixed()}°C</h3>
+            </div>
         `
-        document.querySelector(".times")!.innerHTML += daily;
-    }
+        });
+        document.querySelector(".times")!.innerHTML = daily.join(" ");
 }

@@ -63,12 +63,12 @@ body{
                     outline: none;
                     font-size: 0.8rem;
                     font-weight: 300;
-                    width: 85%;
+                    width: 90%;
                     &::placeholder{
                         color: $feelColor;
                     }
                 }
-                .gps, .searchBtn{
+                .searchBtn{
                     cursor: pointer;
                     font-size: 0.8rem;
                 }

@@ -10,8 +10,8 @@ export const weatherUI = (data:any) => {
         </div>
         </div>
         <div class="right-weather">
-            <h1>${(data.temp).toFixed()}°</h1>
-            <p>${(data.temp_max).toFixed()}°/<span>${(data.temp_min).toFixed()}°</span></p>
+            <h1>${(data.temp).toFixed()}°C</h1>
+            <p>${(data.temp_max).toFixed()}°C/<span>${(data.temp_min).toFixed()}°C</span></p>
         </div>
     `
     document.querySelector(".body")!.innerHTML = bodyText;
