@@ -47,7 +47,6 @@ button?.addEventListener("click", () => {
     }
 });
 
-
 // search input handler 
 searchBtn?.addEventListener("click", () => {
     searchParam = {q : search.value}
@@ -71,7 +70,11 @@ footer?.addEventListener("click", (e) => {
     }
 });
 
-
+// changing the degree 
+export function changeDegree(deg :string){
+    deg = active ? deg = "C" : "F";
+    return deg;
+}
 
 // once the browser is loaded 
 window.addEventListener("DOMContentLoaded", () => {

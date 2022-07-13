@@ -1,4 +1,7 @@
+import { changeDegree } from "..";
 import { formatLuxon, iconURL } from "../config/config";
+
+let deg = "C"
 export const weatherUI = (data:any) => {
     let bodyText = `
         <div class="left-weather">
@@ -10,8 +13,8 @@ export const weatherUI = (data:any) => {
         </div>
         </div>
         <div class="right-weather">
-            <h1>${(data.temp).toFixed()}°C</h1>
-            <p>${(data.temp_max).toFixed()}°C/<span>${(data.temp_min).toFixed()}°C</span></p>
+            <h1>${(data.temp).toFixed()}°${changeDegree(deg)}</h1>
+            <p>${(data.temp_max).toFixed()}°${changeDegree(deg)}/<span>${(data.temp_min).toFixed()}°${changeDegree(deg)}</span></p>
         </div>
     `
     document.querySelector(".body")!.innerHTML = bodyText;
